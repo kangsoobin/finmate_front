@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+//전체 라우팅
+// App.js
+import React, { useState } from 'react';
+import Sidebar from './components/Sidebar';
+import ChatBot from './components/ChatBot';
+import ReportPage from './components/ReportPage';
 
-function App() {
+const App = () => {
+  const [activeTab, setActiveTab] = useState('chatbot');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
+      <div style={{ flex: 1, background: '#fff' }}>
+        {activeTab === 'chatbot' && <ChatBot />}
+        {activeTab === 'report' && <ReportPage />}
+        {activeTab === 'mypage' && <div>My Page 준비 중</div>}
+        
+      </div>
     </div>
   );
-}
+};
 
 export default App;
